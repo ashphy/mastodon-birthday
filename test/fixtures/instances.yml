@@ -1,0 +1,23 @@
+# == Schema Information
+#
+# Table name: instances
+#
+#  id            :integer          not null, primary key
+#  host          :string
+#  client_id     :string
+#  client_secret :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  url: MyString
+  client_id: MyString
+  client_secret: MyString
+
+two:
+  url: MyString
+  client_id: MyString
+  client_secret: MyString

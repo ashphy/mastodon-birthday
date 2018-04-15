@@ -1,0 +1,21 @@
+<h1>Homes#index</h1>
+
+<%= form_tag('/users/auth/mastodon', method: 'post') do %>
+  <%= label_tag(:identifier, name: 'Username') %>
+  <%= text_field_tag(:identifier) %>
+  <%= submit_tag("Login") %>
+<% end %>
+
+<% if user_signed_in? %>
+<% else %>
+  <%= link_to "Sign in with Mastodon", user_mastodon_omniauth_authorize_path %>
+<% end %>
+
+
+<%= current_user.to_json %>
+<% if current_user %>
+  <%= session["devise.mastodon_data"] %>
+<% end %>
+
+<%= session[:mastodon][:extra][:raw_info][:username] %>
+<%= l Time.zone.parse(session[:mastodon][:extra][:raw_info][:created_at]) %>

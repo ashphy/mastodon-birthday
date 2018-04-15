@@ -35,6 +35,13 @@ gem 'jbuilder', '~> 2.5'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'devise'
+gem 'mastodon-api', require: 'mastodon'
+gem 'omniauth'
+gem 'omniauth-mastodon'
+
+gem 'activerecord-session_store'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -51,7 +58,13 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
+  gem 'annotate'
   gem 'rubocop'
+
+  gem "better_errors"
+  gem "binding_of_caller"
+
+  gem 'webmock'
 end
 
 group :test do
