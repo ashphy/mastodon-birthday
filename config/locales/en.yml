@@ -215,6 +215,6 @@ en:
   description: 'Where is your birth day on mastodon?'
   username_description: 'Username (yourname@example.com)'
   birthday: 'Birthday'
-  share_text: '私のマストドンへの登録日は%{birthday}です。%{range}経過しています。 #Mastodonbirthday https://mastodon-birthday.herokuapp.com'
+  share_text: 'My birthday on mastodon is %{birthday}. %{range} passed. #Mastodonbirthday https://mastodon-birthday.herokuapp.com'
   share: 'Share on your instance'
   login: 'Login'
