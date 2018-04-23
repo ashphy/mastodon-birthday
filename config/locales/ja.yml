@@ -207,6 +207,6 @@ ja:
   description: 'マストドン登録日を調べよう！'
   username_description: 'ユーザ名 (例: yourname@example.com)'
   birthday: '誕生日'
-  share_text: '私のマストドンへの登録日は%{birthday}です。登録してから%{range}経過しました🎉 #MastodonBirthday'
+  share_text: '私のマストドンへの登録日は%{birthday}です。登録してから%{range}経過しました🎉 #MastodonBirthday https://mastodon-birthday.herokuapp.com'
   share: 'マストドンでシェアする'
   login: 'ログイン'
