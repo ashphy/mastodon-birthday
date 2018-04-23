@@ -1,10 +1,9 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: instances
 #
-#  id            :integer          not null, primary key
+#  id            :bigint(8)        not null, primary key
 #  host          :string
 #  client_id     :string
 #  client_secret :string

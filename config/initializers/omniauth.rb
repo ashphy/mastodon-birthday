@@ -4,7 +4,7 @@ Rails.application.config.middleware.use OmniAuth::Builder do
   provider :mastodon, scope: 'read write', credentials: lambda { |domain, callback_url|
     Rails.logger.info "Requested credentials for #{domain} with callback URL #{callback_url}"
 
-    instance = Instance.first_or_create(host: domain) do |ins|
+    instance = Instance.find_or_create_by(host: domain) do |ins|
       Rails.logger.info 'Instance not found. Creating app for mastodon instance.'
       client = Mastodon::REST::Client.new(base_url: "https://#{domain}")
       app = client.create_app('MastodonBirthday', callback_url, 'read write')
