@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :mastodon, scope: 'read', credentials: lambda { |domain, callback_url|
+  provider :mastodon, scope: 'write', credentials: lambda { |domain, callback_url|
     Rails.logger.info "Requested credentials for #{domain} with callback URL #{callback_url}"
 
     instance = Instance.first_or_create(host: domain) do |ins|

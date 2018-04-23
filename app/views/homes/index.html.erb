@@ -1,21 +1,46 @@
-<h1>Homes#index</h1>
+<div class="callout large">
+  <div class="text-center">
+    <h1><%= I18n.t('title') %></h1>
+    <h2 class="subheader">
+      <%= I18n.t('description') %>
+    </h2>
+  </div>
+</div>
 
-<%= form_tag('/users/auth/mastodon', method: 'post') do %>
-  <%= label_tag(:identifier, name: 'Username') %>
-  <%= text_field_tag(:identifier) %>
-  <%= submit_tag("Login") %>
-<% end %>
+<div class="grid-container">
+  <div class="grid-x align-center">
+    <div class="cell medium-8">
+      <div class="blog-post">
+        <% if user_signed_in? %>
+          <div class="callout large">
+            <div class="media-object-section">
+              <%= image_tag(avatar) %>
+            </div>
+            <div class="media-object-section">
+              <h3 class="display-name">
+                <%= display_name %>
+              </h3>
+              <p class="username">
+                @<%= user_name %>
+              </p>
+              <p>
+                <%= t('birthday') %>: <%= formatted_birthday %>
+              </p>
+            </div>
+          </div>
 
-<% if user_signed_in? %>
-<% else %>
-  <%= link_to "Sign in with Mastodon", user_mastodon_omniauth_authorize_path %>
-<% end %>
+          <%= form_tag('/homes/share', method: 'post') do %>
+            <%= text_area_tag 'home[content]', t('share_text', birthday: formatted_birthday, range: range), class: 'share-text' %>
+          <% end %>
+        <% else %>
+          <%= form_tag('/users/auth/mastodon', method: 'post') do %>
+            <%= label_tag(:identifier, t('username_description')) %>
+            <%= text_field_tag(:identifier, '', placeholder: 'yourname@example.com') %>
+            <%= submit_tag(t('login'), class: 'button expanded') %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
-
-<%= current_user.to_json %>
-<% if current_user %>
-  <%= session["devise.mastodon_data"] %>
-<% end %>
-
-<%= session[:mastodon][:extra][:raw_info][:username] %>
-<%= l Time.zone.parse(session[:mastodon][:extra][:raw_info][:created_at]) %>

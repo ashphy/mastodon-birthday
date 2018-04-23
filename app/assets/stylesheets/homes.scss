@@ -1,3 +1,19 @@
 // Place all the styles related to the Homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.site-title {
+  background-color: #3adb76;
+}
+
+.media-object-section {
+  display: table-cell;
+}
+
+.display-name{
+  margin-bottom: 0;
+}
+
+.share-text {
+  height: 6em;
+}
