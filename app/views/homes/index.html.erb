@@ -29,8 +29,9 @@
             </div>
           </div>
 
-          <%= form_tag('/homes/share', method: 'post') do %>
+          <%= form_tag('/homes', method: 'post') do %>
             <%= text_area_tag 'home[content]', t('share_text', birthday: formatted_birthday, range: range), class: 'share-text' %>
+            <%= submit_tag(t('share'), class: 'button expanded') %>
           <% end %>
         <% else %>
           <%= form_tag('/users/auth/mastodon', method: 'post') do %>

@@ -1,9 +1,10 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
 #
-#  id                 :integer          not null, primary key
+#  id                 :bigint(8)        not null, primary key
 #  username           :string
 #  uid                :string
 #  provider           :string
@@ -26,5 +27,19 @@ class User < ApplicationRecord
       user.username = auth[:info].name
       Rails.logger.info auth[:extra]
     end
+  end
+
+  def post(text)
+    client.create_status(text)
+  end
+
+  private
+
+  def client
+    _, domain = uid.split('@')
+    Mastodon::REST::Client.new(
+      base_url: "https://#{domain}",
+      bearer_token: token
+    )
   end
 end
