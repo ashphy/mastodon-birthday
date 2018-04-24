@@ -41,7 +41,7 @@
           <%= form_tag('/users/auth/mastodon', method: 'post') do %>
             <%= label_tag(:identifier, t('username_description')) %>
             <%= text_field_tag(:identifier, '',
-                pattern: '^[a-z0-9_]+([a-z0-9_\.]+[a-z0-9_]+)?@[a-z0-9\.\-]+[a-z0-9]+$',
+                pattern: '^[a-zA-Z0-9_]+([a-zA-Z0-9_\.]+[a-zA-Z0-9_]+)?@[a-zA-Z0-9\.\-]+[a-zA-Z0-9]+$',
                 placeholder: 'yourname@example.com') %>
             <%= submit_tag(t('login'), class: 'button expanded') %>
           <% end %>
