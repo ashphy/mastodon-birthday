@@ -41,7 +41,7 @@
           <%= form_tag('/users/auth/mastodon', method: 'post') do %>
             <%= label_tag(:identifier, t('username_description')) %>
             <%= text_field_tag(:identifier, '',
-                pattern: '^[a-z0-9_]+([a-z0-9_\.]+[a-z0-9_]+)?@[a-z0-9\.\-]+[a-z0-9]+$',
+                pattern: '^[a-zA-Z0-9_]+([a-zA-Z0-9_\.]+[a-zA-Z0-9_]+)?@[a-zA-Z0-9\.\-]+[a-zA-Z0-9]+$',
                 placeholder: 'yourname@example.com') %>
             <%= submit_tag(t('login'), class: 'button expanded') %>
           <% end %>
@@ -52,6 +52,7 @@
         <a href="https://osushi.love/intent/post/b68f9e0bbb77426898e97b7fe86c96a8" class="ossh-post-btn" data-type="large">お寿司を送る</a>
         <script src="https://platform.osushi.love/widgets.js"></script>
       </div>
+      <p><a href="https://github.com/ashphy/mastodon-birthday" target="_blank">Code</a></p>
     </div>
   </div>
 </div>
