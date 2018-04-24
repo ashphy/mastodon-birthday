@@ -69,6 +69,8 @@ group :development do
   gem 'binding_of_caller'
 
   gem 'webmock'
+  
+  gem 'brakeman', :require => false
 end
 
 group :test do
