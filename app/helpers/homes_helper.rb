@@ -13,6 +13,10 @@ module HomesHelper
     session[:mastodon][:extra][:raw_info][:avatar]
   end
 
+  def domain
+    URI.parse(session[:mastodon][:extra][:raw_info][:url]).host
+  end
+
   def user_created_at
     Time.zone.parse(session[:mastodon][:extra][:raw_info][:created_at])
   end

@@ -29,10 +29,12 @@
             </div>
           </div>
 
-          <%= form_tag('/homes', method: 'post') do %>
+          <%= form_tag do %>
             <%= text_area_tag 'home[content]', t('share_text', birthday: formatted_birthday, range: range), class: 'share-text' %>
-            <%= submit_tag(t('share'), class: 'button expanded') %>
           <% end %>
+          <a class="button expanded" href="https://<%= domain %>/share?text=<%= CGI.escape(t('share_text', birthday: formatted_birthday, range: range)) %>">
+            <%= t('share') %>
+          </a>
 
           <p><a href="/logout">
             <%= t('logout') %>
