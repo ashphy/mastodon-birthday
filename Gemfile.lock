@@ -160,7 +160,9 @@ GEM
       http (~> 3.3)
       oj (~> 3.7)
     method_source (0.9.2)
-    mimemagic (0.3.3)
+    mimemagic (0.3.10)
+      nokogiri (~> 1)
+      rake
     mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.13.0)
@@ -193,7 +195,8 @@ GEM
       ast (~> 2.4.0)
     pg (1.2.1)
     public_suffix (4.0.2)
-    puma (3.12.2)
+    puma (4.3.8)
+      nio4r (~> 2.0)
     rack (2.0.8)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
@@ -325,7 +328,7 @@ DEPENDENCIES
   omniauth
   omniauth-mastodon
   pg (>= 0.18, < 2.0)
-  puma (~> 3.12)
+  puma (~> 4.3)
   rails (~> 5.2.0)
   rubocop
   sass-rails (~> 5.0)
