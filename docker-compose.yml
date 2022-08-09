@@ -1,0 +1,86 @@
+version: "3.9"
+services:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      - 'POSTGRES_HOST_AUTH_METHOD=trust'
+
+  mastodon-db:
+    restart: always
+    image: postgres:14-alpine
+    shm_size: 256mb
+    networks:
+      - mastodon
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', 'postgres']
+    environment:
+      - 'POSTGRES_PASSWORD=mastodon'
+
+  redis:
+    restart: always
+    image: redis:6-alpine
+    networks:
+      - mastodon
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+
+  web:
+    build: .
+    image: tootsuite/mastodon
+    restart: always
+    env_file: .env.mastodon.dev
+    command: bash -c "rm -f /mastodon/tmp/pids/server.pid; bundle exec rails s -p 3000"
+    networks:
+      - external_network
+      - mastodon
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -q --spider --proxy=off localhost:3000/health || exit 1']
+    ports:
+      - '127.0.0.1:3001:3000'
+    depends_on:
+      - mastodon-db
+      - redis
+    volumes:
+      - ./public/system:/mastodon/public/system
+
+  streaming:
+    build: .
+    image: tootsuite/mastodon
+    restart: always
+    env_file: .env.mastodon.dev
+    command: node ./streaming
+    networks:
+      - external_network
+      - mastodon
+    healthcheck:
+      test: ['CMD-SHELL', 'wget -q --spider --proxy=off localhost:4000/api/v1/streaming/health || exit 1']
+    ports:
+      - '127.0.0.1:4000:4000'
+    depends_on:
+      - db
+      - redis
+
+  sidekiq:
+    build: .
+    image: tootsuite/mastodon
+    restart: always
+    env_file: .env.mastodon.dev
+    command: bundle exec sidekiq
+    depends_on:
+      - db
+      - redis
+    networks:
+      - external_network
+      - mastodon
+    volumes:
+      - ./public/system:/mastodon/public/system
+    healthcheck:
+      test: ['CMD-SHELL', "ps aux | grep '[s]idekiq\ 6' || false"]
+
+networks:
+  external_network:
+  mastodon:
+    internal: true
